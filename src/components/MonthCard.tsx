@@ -94,7 +94,7 @@ const MonthCard = ({ month, song, isActive, onActivate, autoPlay = false }: Mont
           <img 
             src={song.coverUrl} 
             alt={`${song.album} by ${song.artist}`}
-            className="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-110"
+            className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-110"
           />
           
           {/* Play/Pause Button Overlay */}
@@ -104,8 +104,8 @@ const MonthCard = ({ month, song, isActive, onActivate, autoPlay = false }: Mont
               className="p-3 rounded-full bg-primary/80 hover:bg-primary transition-colors duration-200 glow-primary"
             >
               {isPlaying ? 
-                <Pause className="w-5 h-5 text-primary-foreground" /> : 
-                <Play className="w-5 h-5 text-primary-foreground ml-0.5" />
+                <Pause className="w-6 h-6 text-primary-foreground" /> : 
+                <Play className="w-6 h-6 text-primary-foreground ml-0.5" />
               }
             </button>
           </div>

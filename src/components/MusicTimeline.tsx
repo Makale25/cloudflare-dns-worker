@@ -21,84 +21,84 @@ const timelineData: TimelineData = {
     artist: 'Queen',
     album: 'A Night at the Opera',
     coverUrl: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    previewUrl: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav'
+    previewUrl: '' // Voeg hier je eigen MP3 URL toe
   },
   'Februari': {
     title: 'Imagine',
     artist: 'John Lennon',
     album: 'Imagine',
     coverUrl: 'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=400&h=400&fit=crop',
-    previewUrl: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav'
+    previewUrl: '' // Voeg hier je eigen MP3 URL toe
   },
   'Maart': {
     title: 'Hotel California',
     artist: 'Eagles',
     album: 'Hotel California',
     coverUrl: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    previewUrl: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav'
+    previewUrl: '' // Voeg hier je eigen MP3 URL toe
   },
   'April': {
     title: 'Stairway to Heaven',
     artist: 'Led Zeppelin',
     album: 'Led Zeppelin IV',
     coverUrl: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&h=400&fit=crop',
-    previewUrl: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav'
+    previewUrl: '' // Voeg hier je eigen MP3 URL toe
   },
   'Mei': {
     title: 'Sweet Child O\' Mine',
     artist: 'Guns N\' Roses',
     album: 'Appetite for Destruction',
     coverUrl: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    previewUrl: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav'
+    previewUrl: '' // Voeg hier je eigen MP3 URL toe
   },
   'Juni': {
     title: 'Smells Like Teen Spirit',
     artist: 'Nirvana',
     album: 'Nevermind',
     coverUrl: 'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=400&h=400&fit=crop',
-    previewUrl: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav'
+    previewUrl: '' // Voeg hier je eigen MP3 URL toe
   },
   'Juli': {
     title: 'Billie Jean',
     artist: 'Michael Jackson',
     album: 'Thriller',
     coverUrl: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    previewUrl: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav'
+    previewUrl: '' // Voeg hier je eigen MP3 URL toe
   },
   'Augustus': {
     title: 'Purple Rain',
     artist: 'Prince',
     album: 'Purple Rain',
     coverUrl: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&h=400&fit=crop',
-    previewUrl: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav'
+    previewUrl: '' // Voeg hier je eigen MP3 URL toe
   },
   'September': {
     title: 'Like a Rolling Stone',
     artist: 'Bob Dylan',
     album: 'Highway 61 Revisited',
     coverUrl: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop',
-    previewUrl: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav'
+    previewUrl: '' // Voeg hier je eigen MP3 URL toe
   },
   'Oktober': {
     title: 'Hey Jude',
     artist: 'The Beatles',
     album: 'Hey Jude',
     coverUrl: 'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=400&h=400&fit=crop',
-    previewUrl: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav'
+    previewUrl: '' // Voeg hier je eigen MP3 URL toe
   },
   'November': {
     title: 'What\'s Going On',
     artist: 'Marvin Gaye',
     album: 'What\'s Going On',
     coverUrl: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop',
-    previewUrl: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav'
+    previewUrl: '' // Voeg hier je eigen MP3 URL toe
   },
   'December': {
     title: 'Respect',
     artist: 'Aretha Franklin',
     album: 'I Never Loved a Man the Way I Love You',
     coverUrl: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&h=400&fit=crop',
-    previewUrl: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav'
+    previewUrl: '' // Voeg hier je eigen MP3 URL toe
   }
 };
 
@@ -161,20 +161,11 @@ const MusicTimeline = () => {
       <div className="relative w-full max-w-[1400px] mx-auto px-8">
         {/* Timeline Line */}
         <div className="absolute top-1/2 left-8 right-8 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent transform -translate-y-1/2 z-0" />
-        
-        {/* Active Month Indicator */}
-        <div 
-          className="absolute top-1/2 w-4 h-4 bg-primary rounded-full glow-primary transform -translate-y-1/2 transition-all duration-500 z-10"
-          style={{ 
-            left: `calc(2rem + ${(activeMonthIndex / (months.length - 1)) * (100 - 4)}%)`,
-            transform: 'translateX(-50%) translateY(-50%)'
-          }}
-        />
 
         {/* Month Cards Container - Showing 7 cards at a time */}
         <div className="relative overflow-hidden py-12">
           <div 
-            className="flex gap-6 transition-transform duration-700 ease-out"
+            className="flex gap-6 transition-transform duration-700 ease-out px-4"
             style={{
               transform: `translateX(-${Math.max(0, (activeMonthIndex - 3) * (100 / 7))}%)`
             }}
