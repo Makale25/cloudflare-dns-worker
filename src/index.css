@@ -8,35 +8,57 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Galaxy theme colors */
+    --background: 222 44% 4%;
+    --foreground: 240 10% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 223 41% 6%;
+    --card-foreground: 240 10% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 223 41% 6%;
+    --popover-foreground: 240 10% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 240 10% 95%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 223 41% 8%;
+    --secondary-foreground: 240 10% 85%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 223 41% 8%;
+    --muted-foreground: 240 5% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 262 83% 58%;
+    --accent-foreground: 240 10% 95%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 240 10% 95%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 223 41% 12%;
+    --input: 223 41% 12%;
+    --ring: 262 83% 58%;
 
-    --radius: 0.5rem;
+    /* Galaxy gradients */
+    --gradient-galaxy: linear-gradient(135deg, 
+      hsl(222, 44%, 4%) 0%, 
+      hsl(223, 41%, 6%) 25%,
+      hsl(240, 30%, 8%) 50%,
+      hsl(262, 25%, 10%) 75%,
+      hsl(222, 44%, 4%) 100%);
+    
+    --gradient-card: linear-gradient(135deg,
+      hsla(223, 41%, 8%, 0.4) 0%,
+      hsla(262, 83%, 20%, 0.2) 100%);
+    
+    --gradient-glow: radial-gradient(circle,
+      hsla(262, 83%, 58%, 0.3) 0%,
+      transparent 70%);
+
+    /* Particle colors */
+    --particle-primary: 262 83% 58%;
+    --particle-secondary: 240 30% 70%;
+    --particle-accent: 280 60% 45%;
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +123,46 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-galaxy);
+    background-attachment: fixed;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .gradient-galaxy {
+    background: var(--gradient-galaxy);
+  }
+  
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+  
+  .gradient-glow {
+    background: var(--gradient-glow);
+  }
+  
+  .glassmorphism {
+    backdrop-filter: blur(20px);
+    border: 1px solid hsla(262, 83%, 58%, 0.2);
+  }
+  
+  .glow-primary {
+    box-shadow: 0 0 30px hsla(262, 83%, 58%, 0.3);
+  }
+  
+  .glow-hover {
+    transition: all 0.3s ease;
+  }
+  
+  .glow-hover:hover {
+    box-shadow: 0 0 40px hsla(262, 83%, 58%, 0.5);
+    transform: scale(1.05);
+  }
+  
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
   }
 }
