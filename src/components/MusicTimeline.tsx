@@ -158,7 +158,7 @@ const MusicTimeline = () => {
       </div>
 
       {/* Timeline Container */}
-      <div className="relative w-full max-w-7xl mx-auto px-8">
+      <div className="relative w-full max-w-[1400px] mx-auto px-8">
         {/* Timeline Line */}
         <div className="absolute top-1/2 left-8 right-8 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent transform -translate-y-1/2 z-0" />
         
@@ -171,27 +171,35 @@ const MusicTimeline = () => {
           }}
         />
 
-        {/* Month Cards - Distributed across full width */}
-        <div className="relative grid grid-cols-12 gap-4 py-12">
-          {months.map((month, index) => (
-            <div
-              key={month}
-              className={`
-                flex justify-center transition-all duration-500
-                ${index === activeMonthIndex ? 'animate-scale-in z-20' : 'z-10'}
-              `}
-            >
-              <MonthCard
-                month={month}
-                song={timelineData[month]}
-                isActive={index === activeMonthIndex}
-                onActivate={() => {
-                  setActiveMonthIndex(index);
-                }}
-                autoPlay={true} // Always auto-play when focused
-              />
-            </div>
-          ))}
+        {/* Month Cards Container - Showing 7 cards at a time */}
+        <div className="relative overflow-hidden py-12">
+          <div 
+            className="flex gap-6 transition-transform duration-700 ease-out"
+            style={{
+              transform: `translateX(-${Math.max(0, (activeMonthIndex - 3) * (100 / 7))}%)`
+            }}
+          >
+            {months.map((month, index) => (
+              <div
+                key={month}
+                className={`
+                  flex-shrink-0 transition-all duration-500
+                  ${index === activeMonthIndex ? 'animate-scale-in z-20' : 'z-10'}
+                `}
+                style={{ width: 'calc((100vw - 10rem) / 7)' }}
+              >
+                <MonthCard
+                  month={month}
+                  song={timelineData[month]}
+                  isActive={index === activeMonthIndex}
+                  onActivate={() => {
+                    setActiveMonthIndex(index);
+                  }}
+                  autoPlay={true}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Navigation Buttons */}
