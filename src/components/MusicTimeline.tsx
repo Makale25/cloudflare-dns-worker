@@ -158,65 +158,91 @@ const MusicTimeline = () => {
       </div>
 
       {/* Timeline Container */}
-      <div className="relative w-full max-w-7xl">
+      <div className="relative w-full max-w-7xl mx-auto px-8">
         {/* Timeline Line */}
-        <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent transform -translate-y-1/2 z-0" />
+        <div className="absolute top-1/2 left-8 right-8 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent transform -translate-y-1/2 z-0" />
         
         {/* Active Month Indicator */}
         <div 
           className="absolute top-1/2 w-4 h-4 bg-primary rounded-full glow-primary transform -translate-y-1/2 transition-all duration-500 z-10"
           style={{ 
-            left: `${(activeMonthIndex / (months.length - 1)) * 100}%`,
+            left: `calc(2rem + ${(activeMonthIndex / (months.length - 1)) * (100 - 4)}%)`,
             transform: 'translateX(-50%) translateY(-50%)'
           }}
         />
 
-        {/* Month Cards */}
-        <div className="relative overflow-x-auto pb-8">
-          <div className="flex gap-8 px-4 py-12">
-            {months.map((month, index) => (
-              <div
-                key={month}
-                className={`
-                  flex-shrink-0 transition-all duration-500
-                  ${index === activeMonthIndex ? 'animate-scale-in' : ''}
-                `}
-              >
-                <MonthCard
-                  month={month}
-                  song={timelineData[month]}
-                  isActive={index === activeMonthIndex}
-                  onActivate={() => setActiveMonthIndex(index)}
-                  autoPlay={isAutoPlaying}
-                />
-              </div>
-            ))}
-          </div>
+        {/* Month Cards - Distributed across full width */}
+        <div className="relative grid grid-cols-12 gap-4 py-12">
+          {months.map((month, index) => (
+            <div
+              key={month}
+              className={`
+                flex justify-center transition-all duration-500
+                ${index === activeMonthIndex ? 'animate-scale-in z-20' : 'z-10'}
+              `}
+            >
+              <MonthCard
+                month={month}
+                song={timelineData[month]}
+                isActive={index === activeMonthIndex}
+                onActivate={() => {
+                  setActiveMonthIndex(index);
+                }}
+                autoPlay={true} // Always auto-play when focused
+              />
+            </div>
+          ))}
         </div>
 
         {/* Navigation Buttons */}
-        <div className="flex justify-between items-center mt-8">
+        <div className="flex justify-between items-center mt-8 px-4">
           <button
             onClick={prevMonth}
-            className="p-3 rounded-full bg-secondary hover:bg-accent transition-colors duration-200 glow-hover group"
+            disabled={activeMonthIndex === 0}
+            className={`
+              p-4 rounded-full transition-all duration-200 group
+              ${activeMonthIndex === 0 
+                ? 'bg-muted/50 cursor-not-allowed opacity-50' 
+                : 'bg-secondary hover:bg-accent glow-hover'
+              }
+            `}
           >
-            <ChevronLeft className="w-6 h-6 text-secondary-foreground group-hover:text-accent-foreground" />
+            <ChevronLeft className={`
+              w-6 h-6 transition-colors duration-200
+              ${activeMonthIndex === 0 
+                ? 'text-muted-foreground' 
+                : 'text-secondary-foreground group-hover:text-accent-foreground'
+              }
+            `} />
           </button>
           
           <div className="text-center">
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-sm mb-1">
               {activeMonthIndex + 1} / {months.length}
             </p>
-            <p className="text-foreground font-semibold">
+            <p className="text-foreground font-semibold text-lg">
               {months[activeMonthIndex]}
             </p>
           </div>
           
           <button
             onClick={nextMonth}
-            className="p-3 rounded-full bg-secondary hover:bg-accent transition-colors duration-200 glow-hover group"
+            disabled={activeMonthIndex === months.length - 1}
+            className={`
+              p-4 rounded-full transition-all duration-200 group
+              ${activeMonthIndex === months.length - 1 
+                ? 'bg-muted/50 cursor-not-allowed opacity-50' 
+                : 'bg-secondary hover:bg-accent glow-hover'
+              }
+            `}
           >
-            <ChevronRight className="w-6 h-6 text-secondary-foreground group-hover:text-accent-foreground" />
+            <ChevronRight className={`
+              w-6 h-6 transition-colors duration-200
+              ${activeMonthIndex === months.length - 1 
+                ? 'text-muted-foreground' 
+                : 'text-secondary-foreground group-hover:text-accent-foreground'
+              }
+            `} />
           </button>
         </div>
       </div>
