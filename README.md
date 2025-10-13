@@ -10,19 +10,40 @@ A lightweight Cloudflare Workers DNS over HTTPS proxy that forwards DNS queries 
 - Minimal, dependency-free Worker script for low latency and low resource usage  
 - Deployable with Wrangler or the Cloudflare Dashboard
 
-## Quickstart
-1. Clone this repository and save your Worker script as `index.js`.  
-2. Add a `wrangler.toml` with your Worker name and compatibility date.  
-3. Authenticate with Cloudflare: `wrangler login`.  
-4. Publish: `wrangler publish`.  
-5. Set your DoH template URL to `https://<your-worker>.workers.dev/dns-query` in your OS or DoH client.
+## How to use
 
-## Usage Examples
-- Windows 11 DoH template: `https://<your-worker>.workers.dev/dns-query`  
-- Browser DoH client: send `GET` with base64url `dns` param or `POST` with `application/dns-message` body  
-- Test with curl:  
-  - POST: `curl -X POST -H "Content-Type: application/dns-message" --data-binary @query.bin https://<your-worker>.workers.dev/dns-query`  
-  - GET: `curl "https://<your-worker>.workers.dev/dns-query?dns=<base64url>"`
+# How to deploy the Cloudflare DoH Worker from the repository
+
+1. Open Cloudflare dashboard:
+   - Go to https://dash.cloudflare.com/
+2. Sign in or create an account:
+   - Create an account or log in with your existing Cloudflare credentials.
+3. Click on Compute (Workers):
+   - In the left sidebar click "Compute" then choose "Workers & Pages".
+4. Create a new application:
+   - On the right side click "Create application".
+5. Import a repository:
+   - Select "Import a repository" to start by importing an existing Git repository.
+6. Choose clone via Git URL:
+   - Click "Clone a public repository via Git URL".
+7. Paste the repository URL:
+   - Use this repo URL: `https://github.com/jalaljaleh/cloudflare-dns-worker`
+   - Paste it into the Git URL field and continue.
+8. Configure and deploy:
+   - Follow the UI prompts to name the application, set any build settings, and confirm.
+   - Click "Create" or "Deploy" to start the deployment process.
+9. Verify deployment and test:
+   - After deployment, note the Worker URL (e.g., `https://<your-worker>.workers.dev/` or `https://<your-worker>.workers.dev/dns-query`)).
+   - Test your DoH endpoint:
+     - GET example: `https://<your-worker>.workers.dev/dns-query?dns=<base64url>`
+     - POST example: POST `application/dns-message` body to `https://<your-worker>.workers.dev/dns-query`
+10. Optional: monitor and configure
+    - Monitor usage and logs in the Cloudflare dashboard.
+    - Add secrets or environment variables in the dashboard if needed.
+    - If you want CI/CD, connect the repository to Cloudflare for automatic deploys on push.
+
+Now your DNS over HTTPS proxy is deployed and ready for testing.
+
 
 ## Limitations and Notes
 - Intended as a proxy, not a full recursive resolver or a public DNS service.  
